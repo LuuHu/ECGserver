@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>查看ECG记录</title>
+
+    <meta name="author" content="CyanO">
+
+    <link href="static/check_item/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/check_item/css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h2 style="margin-top: 36px">
+				ECG 历史记录查看
+			</h2>
+			<h4 style="margin-top: 30px">
+				正在查看 ECG 记录文件 : {{ paramter[1] }}
+			</h4>
+			<h5 style="margin-top: 24px">
+				来自设备 : {{ paramter[0] }}
+			</h5>
+			<p>
+				<a class="btn" href="/history/{{ paramter[0] }}">查看该设备更多记录 »</a>
+			</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" >
+			<div style="background-image: url('{{ dir }}/ecg_graph_0.jpg'); background-size: 100% 100%;width: 100%; padding-top: 14%;"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" >
+			<div style="background-image: url('{{ dir }}/ecg_graph_1.jpg'); background-size: 100% 100%;width: 100%; padding-top: 14%;"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" >
+			<div style="background-image: url('{{ dir }}/ecg_graph_2.jpg'); background-size: 100% 100%;width: 100%; padding-top: 14%;"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12" style="text-align: center;">
+			<img alt="ecg_bio" src="{{ dir }}/ecg_bio.png">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<dl>
+				<dt>
+					ML Diagnose Result
+				</dt>
+				{% for dec in description %}
+				<dd>
+					{{ dec }}
+				</dd>
+				{% endfor %}
+			</dl>
+		</div>
+	</div>
+</div>
+
+    <script src="static/check_item/js/jquery.min.js"></script>
+    <script src="static/check_item/js/bootstrap.min.js"></script>
+    <script src="static/check_item/js/scripts.js"></script>
+  </body>
+</html>

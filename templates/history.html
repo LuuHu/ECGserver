@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ECG 历史详情</title>
+    <link href="../../static/history/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../../static/history/css/style.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center text-info"  style="margin-top: 36px">
+				设备 {{id}} 的 ECG 记录
+			</h3>
+		</div>
+    </div>
+    <!-- <form action="/check" enctype="multipart/form-data" method="post">
+		Username: <input type="text" name="username">
+		Password: <input type="password" name="password">
+		File: <input type="file" name="file">
+		<input type="submit">
+	</form> -->
+	<div class="row"  style="margin-top: 30px">
+		<div class="col-md-12">
+			<table class="table table-bordered table-hover">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							操作
+						</th>
+						<th>记录文件</th>
+						<th>状态</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for item in items %}
+					<tr class={{ item[1] }}>
+						<td>
+							{{ item[0] }}
+						</td>
+						<td>
+                            <form action="/check" enctype="multipart/form-data" method="post" style="display: inline;">
+								<input name = 'dev_id' value = {{id}} style="display: none;">
+								<button class="btn btn-success" type="submit" name= 'file_name' value={{ item[2] }}>查看</button>
+							</form>
+							<form action="/download" enctype="multipart/form-data" method="post" style="display: inline;">
+								<input name = 'dev_id' value = {{id}} style="display: none;">
+								<button class="btn btn-primary" type="submit" name= 'file_name' value={{ item[2] }}>下载</button>
+							</form>
+							<!-- <form id="form1" onsubmit="return false" action="##" method="post">
+								<p><input  name="dev_id" style="display: none;" value={{ id }}></p>
+								<p><input  name="file_name" style="display: none;" value={{ item[2] }}></p>
+								<p><button class="btn btn-primary" type="button"  onclick="down()">下载</button></p>
+							</form> -->
+						</td>
+						<td>
+							{{ item[2] }}
+						</td>
+						<td>
+							{{ item[3] }}
+						</td>
+					</tr>
+					{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+    <script src="../../static/history/js/jquery.min.js"></script>
+    <script src="../../static/history/js/bootstrap.min.js"></script>
+	<script src="../../static/history/js/scripts.js"></script>
+	<!-- <script>
+		$(".btn-primary").click(function() {
+			$.post("/download",
+			{
+				dev_id:12 ,
+				data2: 12
+			},
+			function() {
+				alert(1)
+			}
+			);
+		})
+	</script> -->
+	<script type="text/javascript">
+        function down() {
+            $.ajax({
+            //几个参数需要注意一下
+                type: "POST",//方法类型
+                dataType: "json",//预期服务器返回的数据类型
+                url: "/download" ,//url
+                data: $('#form1').serialize(),
+                success: function (result) {
+                    console.log(result);//打印服务端返回的数据(调试用)
+                    if (result.resultCode == 200) {
+                        alert("SUCCESS");
+                    }
+                    ;
+                },
+                error : function() {
+                    alert("error!");
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ECG 设备列表</title>
+
+	<meta name="author" content="CyanO">
+
+    <link href="static/dev_list/css/bootstrap.min.css" rel="stylesheet">
+    <link href="static/dev_list/css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid" style="margin-top: 36px">
+	<div class="row">
+		<div class="col-md-12">
+			<h3 class="text-center text-info">
+				ECG 设备列表
+			</h3>
+			<li class="list-item" style="margin-top: 20px">
+				提交过信息的设备将会在下方出现
+				
+			</li>
+			<table class="table" style="margin-top: 30px">
+				<thead>
+					<tr>
+						<th>
+							#
+						</th>
+						<th>
+							设备 ID
+						</th>
+						<th>
+							最近上报时间
+						</th>
+						<th>
+							在线情况
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for item in items %}
+					<tr class= {{ item[3] }} >
+						<td>
+							{{ item[0] }}
+						</td>
+						<td>
+							<a href="/history/{{ item[1] }}"">
+								{{ item[1] }}
+							</a>
+						</td>
+						<td>
+							{{ item[2] }}
+						</td>
+						<td>
+							{{ item[4] }}
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+    <script src="static/dev_list/js/jquery.min.js"></script>
+    <script src="static/dev_list/js/bootstrap.min.js"></script>
+    <script src="static/dev_list/js/scripts.js"></script>
+  </body>
+</html>
